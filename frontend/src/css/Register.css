@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatica+SC:wght@700&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.register-bg {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.register-form-container {
+  position: relative;
+  flex: 1 1 50%;
+  background: rgba(255,255,255,0.85);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 64px;
+  z-index: 2;
+}
+
+.flavorfindr-brand {
+  position: fixed;
+  top: 10px;
+  left: 32px;
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: black;
+  margin-bottom: 1rem;
+  margin-left: 10px;
+  z-index: 100;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.12);
+}
+
+.register-title {
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.register-subtitle {
+  font-family: 'Avenir', 'Arial', sans-serif;
+  font-weight: 300;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.register-form label {
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 1.1rem;
+  margin-bottom: 0.2rem;
+  color: black;
+}
+
+.register-form input {
+  font-family: 'Avenir', 'Arial', sans-serif;
+  font-weight: 300;
+  width: 100%;
+  min-width: 0;
+  padding: 12px 18px;
+  border: 2px solid #ddd;
+  border-radius: 30px;
+  font-size: 1rem;
+  outline: none;
+  background: #fff;
+  margin-bottom: 0.5rem;
+  transition: border 0.2s;
+}
+
+.register-form input:focus {
+  border: 2px solid var(--primary-color);
+}
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.toggle-password img {
+  width: 22px;
+  height: 22px;
+}
+
+.register-btn {
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 2rem;
+  letter-spacing: 0.18em;
+  background: var(--primary-color);
+  color: #222;
+  border: none;
+  border-radius: 40px;
+  padding: 14px 0;
+  width: 200px;
+  max-width: 100%;
+  display: block;
+  margin: 1.2rem auto 0 auto;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.register-btn:hover {
+  background: var(--primary-color-light);
+}
+
+.register-bg-image {
+  flex: 1 1 50%;
+  background: url('../images/loginreg.jpg') center center/cover no-repeat;
+  min-height: 100vh;
+  width: 50vw;
+  z-index: 1;
+}
+
+.register-form-row {
+  display: flex;
+  gap: 18px;
+}
+
+.register-form-row .password-input-wrapper {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.register-form-row input {
+  width: 100%;
+}
+
+.register-title, .register-subtitle {
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.input-error {
+  border: 2px solid #e53935 !important;
+  background: #fff6f6;
+}
+
+.error-message {
+  color: #e53935;
+  font-size: 0.95rem;
+  margin-top: 2px;
+  margin-bottom: 4px;
+  font-family: 'Avenir', 'Arial', sans-serif;
+}
+
+@media (max-width: 700px) {
+  .register-form-row {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+@media (max-width: 900px) {
+  .register-bg {
+    flex-direction: column;
+  }
+  .register-form-container, .register-bg-image {
+    width: 100vw;
+    min-height: 50vh;
+    flex: unset;
+  }
+  .register-form-container {
+    padding: 32px 16px;
+    align-items: center;
+  }
+  .register-form {
+    max-width: 100%;
+  }
+}
