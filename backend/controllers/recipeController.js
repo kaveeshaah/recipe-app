@@ -1,48 +1,55 @@
 const Recipe = require("../models/Recipe");
 
-// GET all recipes
-const getRecipes = async (req, res) => {
+// @desc Create a new recipe
+exports.createRecipe = async (req, res) => {
+  try {
+    const recipe = new Recipe(req.body);
+    const saved = await recipe.save();
+    res.status(201).json(saved);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
+// @desc Get all recipes
+exports.getAllRecipes = async (req, res) => {
   try {
     const recipes = await Recipe.find();
     res.json(recipes);
-  } catch (err) {
-    res.status(500).json({ message: "Failed to fetch recipes" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
-// GET one recipe
-const getRecipeById = async (req, res) => {
+// @desc Get a single recipe by ID
+exports.getRecipeById = async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
+    if (!recipe) return res.status(404).json({ message: "Not found" });
     res.json(recipe);
-  } catch (err) {
-    res.status(404).json({ message: "Recipe not found" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
 
-// POST create new recipe
-const createRecipe = async (req, res) => {
-  const { title, description, ingredients, instructions, image, category } = req.body;
-
+// @desc Update recipe
+exports.updateRecipe = async (req, res) => {
   try {
-    const newRecipe = new Recipe({
-      title,
-      description,
-      ingredients,
-      instructions,
-      image,
-      category,
+    const updated = await Recipe.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
     });
-
-    const saved = await newRecipe.save();
-    res.status(201).json(saved);
-  } catch (err) {
-    res.status(400).json({ message: "Could not create recipe" });
+    res.json(updated);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
   }
 };
 
-module.exports = {
-  getRecipes,
-  getRecipeById,
-  createRecipe,
+// @desc Delete recipe
+exports.deleteRecipe = async (req, res) => {
+  try {
+    await Recipe.findByIdAndDelete(req.params.id);
+    res.json({ message: "Recipe deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };

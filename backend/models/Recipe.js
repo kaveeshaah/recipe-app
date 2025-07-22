@@ -7,7 +7,7 @@ const recipeSchema = mongoose.Schema(
     ingredients: [String],
     instructions: String,
     image: String, // Store image URL or path
-    category: String, // breakfast, dinner, culture, healthy etc.
+    category: [String], // breakfast, dinner, culture, healthy etc.
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

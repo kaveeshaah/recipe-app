@@ -1,13 +1,21 @@
 const express = require("express");
-const { getRecipes, getRecipeById, createRecipe } = require("../controllers/recipeController");
+const {
+  createRecipe,
+  getAllRecipes,
+  getRecipeById,
+  updateRecipe,
+  deleteRecipe,
+} = require("../controllers/recipeController");
 
 const router = express.Router();
 
-// Public Routes
-router.get("/", getRecipes);
-router.get("/:id", getRecipeById);
+router.route("/")
+  .post(createRecipe)     // POST /api/recipes
+  .get(getAllRecipes);    // GET /api/recipes
 
-// Protected (add auth later)
-router.post("/", createRecipe);
+router.route("/:id")
+  .get(getRecipeById)     // GET /api/recipes/:id
+  .put(updateRecipe)      // PUT /api/recipes/:id
+  .delete(deleteRecipe);  // DELETE /api/recipes/:id
 
 module.exports = router;
