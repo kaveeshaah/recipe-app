@@ -1,0 +1,342 @@
+.home-page {
+  background: #fff;
+  min-height: 100vh;
+  padding-top: 64px;
+  font-family: 'Avenir', 'Arial', sans-serif;
+}
+
+.logo {
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+
+.home-banner {
+  width: 100vw;
+  max-width: 100%;
+  height: 420px;
+  display: flex;
+  align-items: center;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.home-banner-quote {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  padding-left: 90px;
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 3.1rem;
+  color: #222;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.1;
+  text-align: left;
+  z-index: 2;
+  background: none;
+}
+
+.home-banner-img-wrapper {
+  flex: 1 1 0;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.home-banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.home-banner-text {
+  color: #222;
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-shadow: 1px 1px 8px #fff8;
+  line-height: 1.1;
+}
+
+.see-all-btn {
+  position: absolute;
+  left: 90px;
+  top: 65%;
+  background: var(--primary-color-light, #FFE082);
+  color: #222;
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 18px;
+  padding: 12px 32px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(252,188,48,0.08);
+  transition: background 0.2s, color 0.2s;
+  z-index: 2;
+}
+.see-all-btn:hover {
+  background: var(--primary-color, #FCBC30);
+  color: #111;
+}
+
+.popular-section {
+  margin: 48px 0 0 0;
+  padding: 0 4vw;
+}
+
+.popular-title {
+  text-align: center;
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 32px;
+  color: #222;
+}
+
+.popular-recipes {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  padding: 20px 0;
+  -ms-overflow-style: none;  /* Hide scrollbar IE and Edge */
+  scrollbar-width: none;  /* Hide scrollbar Firefox */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  max-width: 100%;
+  padding-left: max(20px, (100% - (280px * 4 + 32px * 3)) / 2);
+  padding-right: max(20px, (100% - (280px * 4 + 32px * 3)) / 2);
+}
+
+.popular-recipes::-webkit-scrollbar {
+  display: none;  /* Hide scrollbar Chrome, Safari and Opera */
+}
+
+.carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.carousel-dots .dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary-color-light, #FFE082);
+  border-radius: 50%;
+  transition: background-color 0.2s ease;
+}
+
+.carousel-dots .dot.active {
+  background-color: var(--primary-color, #FCBC30);
+}
+
+.recipe-card {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+
+.recipe-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.recipe-img-container {
+  position: relative;
+  width: 100%;
+}
+
+.recipe-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+.bookmark-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.bookmark-icon {
+  font-size: 20px;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  opacity: 0.9;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.bookmark-btn:hover .bookmark-icon {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.recipe-info {
+  padding: 16px 16px 0 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.recipe-title {
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  color: #000;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.2;
+  height: 2.4em;
+}
+
+.recipe-meta {
+  display: grid;
+  row-gap: 2px;
+  margin-bottom: 12px;
+  font-size: 0.82rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.meta-item {
+  display: flex;
+  gap: 4px;
+  font-weight: 400;
+}
+
+.meta-label {
+  color: #777;
+  min-width: 85px;
+}
+
+.recipe-btn {
+  width: 100%;
+  margin: 0 0 0 0;
+  background: var(--primary-color, #FCBC30);
+  color: #000;
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 0;
+  padding: 12px 0;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.recipe-btn:hover {
+  background: #e0a800;
+}
+
+.dots-navigation {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: var(--primary-color-light, #FFE082);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.dot:hover {
+  background-color: var(--primary-color, #FCBC30);
+}
+
+@media (max-width: 900px) {
+  .home-banner {
+    height: 240px;
+  }
+  .home-banner-quote {
+    font-size: 1.3rem;
+  }
+  .popular-recipes {
+    gap: 18px;
+  }
+  .recipe-card {
+    width: 170px;
+  }
+  .recipe-img {
+    height: 90px;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-banner {
+    height: 120px;
+    padding: 0 2vw;
+  }
+  .home-banner-overlay {
+    padding: 0 2vw;
+  }
+  .home-banner-quote {
+    font-size: 0.9rem;
+  }
+  .popular-section {
+    padding: 0 2vw;
+  }
+  .recipe-card {
+    width: 98vw;
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 1600px) {
+  .home-banner-img {
+    max-width: 900px;
+    min-width: 600px;
+  }
+  .home-banner-quote {
+    left: 180px;
+    font-size: 3.5rem;
+  }
+  .see-all-btn {
+    right: 180px;
+    bottom: 90px;
+  }
+}

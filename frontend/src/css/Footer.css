@@ -1,0 +1,87 @@
+.footer {
+  background: var(--primary-color, #FCBC30);
+  padding: 48px 0 0 0;
+  margin-top: auto;
+  border-radius: 32px 32px 0 0;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+}
+
+.footer-section {
+  flex: 1;
+}
+
+.footer-title {
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 1.5rem;
+  color: #222;
+  margin-bottom: 16px;
+  font-weight: 700;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-links a {
+  color: #222;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: #000;
+}
+
+.footer-brand {
+  text-align: right;
+}
+
+.footer-logo {
+  font-family: 'Amatica SC', cursive, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+  letter-spacing: 0.08em;
+}
+
+.footer-email {
+  color: #222;
+  font-size: 0.9rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 32px;
+  padding: 16px 0;
+  background: #fff;
+  color: #222;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    gap: 32px;
+    padding: 0 24px;
+  }
+
+  .footer-brand {
+    text-align: left;
+  }
+
+  .footer-section {
+    flex: none;
+  }
+}
