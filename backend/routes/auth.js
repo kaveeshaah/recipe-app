@@ -49,4 +49,14 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Get all users (for admin/testing purposes)
+router.get("/users", async (req, res) => {
+  try {
+    const users = await User.find({}, "-password"); // Exclude password field
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;

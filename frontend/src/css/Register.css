@@ -177,6 +177,41 @@ body {
   font-family: 'Avenir', 'Arial', sans-serif;
 }
 
+.success-message {
+  background: #e6f9e6;
+  color: #2e7d32;
+  border: 1.5px solid #b2dfdb;
+  border-radius: 18px;
+  padding: 12px 0;
+  margin-bottom: 18px;
+  text-align: center;
+  font-size: 1.1rem;
+  font-family: 'Avenir', 'Arial', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.toast-notification {
+  position: fixed;
+  top: 32px;
+  right: 32px;
+  background: #2ecc40;
+  color: #fff;
+  padding: 18px 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(44, 204, 64, 0.15);
+  font-size: 1.1rem;
+  font-family: 'Avenir', 'Arial', sans-serif;
+  font-weight: 600;
+  z-index: 9999;
+  animation: toast-in 0.4s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-30px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+
 @media (max-width: 700px) {
   .register-form-row {
     flex-direction: column;

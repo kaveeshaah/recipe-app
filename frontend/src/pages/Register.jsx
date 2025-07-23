@@ -14,6 +14,7 @@ const Register = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -33,20 +34,44 @@ const Register = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitted(true);
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
-      // Submit form logic here
-      alert('Registration successful!');
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username: form.username,
+            email: form.email,
+            password: form.password
+          })
+        });
+        const data = await response.json();
+        if (response.ok) {
+          setSuccessMessage('Registration successful!');
+          setForm({ fullName: '', email: '', username: '', password: '', confirmPassword: '' });
+          setSubmitted(false);
+          setTimeout(() => setSuccessMessage(''), 4000);
+        } else {
+          setErrors({ ...errors, backend: data.message || 'Registration failed.' });
+        }
+      } catch (err) {
+        setErrors({ ...errors, backend: 'Network error. Please try again.' });
+      }
     }
   };
 
   return (
     <div className="register-bg">
       <div className="flavorfindr-brand">FlavorFindr</div>
+      {/* Toast notification */}
+      {successMessage && (
+        <div className="toast-notification">{successMessage}</div>
+      )}
       <div className="register-form-container">
         <h2 className="register-title">Let's Get Cooking!</h2>
         <p className="register-subtitle">Create your account and start your flavorful journey.</p>
@@ -124,6 +149,7 @@ const Register = () => {
               {errors.confirmPassword && submitted && <div className="error-message">{errors.confirmPassword}</div>}
             </div>
           </div>
+          {errors.backend && <div className="error-message">{errors.backend}</div>}
 
           <button type="submit" className="register-btn">Register</button>
         </form>
