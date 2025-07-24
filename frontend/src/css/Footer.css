@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Combo&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 .footer {
   background: var(--primary-color, #FCBC30);
   padding: 48px 0 0 0;
@@ -27,6 +29,7 @@
 }
 
 .footer-links {
+  font-family: 'Combo', system-ui;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -40,7 +43,7 @@
 }
 
 .footer-links a:hover {
-  color: #000;
+  color: #fff;
 }
 
 .footer-brand {
@@ -49,22 +52,24 @@
 
 .footer-logo {
   font-family: 'Amatica SC', cursive, sans-serif;
-  font-size: 2rem;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 8px;
-  letter-spacing: 0.08em;
+  font-size: 2.4rem;
+  font-weight: 900;
+  color: black;
+  user-select: none;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.12);
 }
 
 .footer-email {
+  font-family: "Combo", system-ui;
   color: #222;
   font-size: 0.9rem;
 }
 
 .footer-bottom {
   text-align: center;
-  margin-top: 32px;
-  padding: 16px 0;
+  font-family:  "Combo", system-ui;
+  margin-top: 25px;
+  padding: 12px 0;
   background: #fff;
   color: #222;
   font-size: 0.9rem;

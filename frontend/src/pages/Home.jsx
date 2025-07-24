@@ -66,20 +66,23 @@ const Home = () => {
               </div>
               <div className="recipe-info">
                 <h3 className="recipe-title">{recipe.title}</h3>
-                <div className="recipe-meta">
-                  <div className="meta-item">
-                    <span className="meta-label">Prep Time:</span> 10 min
-                  </div>
-                  <div className="meta-item">
-                    <span className="meta-label">Cook Time:</span> 20 min
-                  </div>
-                  <div className="meta-item">
-                    <span className="meta-label">Serves:</span> 4
-                  </div>
-                  <div className="meta-item">
-                    <span className="meta-label">Difficulty:</span> Easy
-                  </div>
+                {/* <div className="recipe-description">{recipe.description}</div> */}
+
+                <div className="recipe-category">
+                  {Array.isArray(recipe.category) ? (
+                    recipe.category.map((cat, idx) => (
+                      <React.Fragment key={idx}>
+                        <span>{cat}</span>
+                        {idx < recipe.category.length - 1 && (
+                          <span className="separator">{" > "}</span>
+                        )}
+                      </React.Fragment>
+                    ))
+                  ) : (
+                    <span>{recipe.category}</span>
+                  )}
                 </div>
+
                 <button
                   className="recipe-btn"
                   onClick={() => navigate(`/recipes/${recipe._id}`)}
