@@ -28,6 +28,8 @@ const Filter = ({ setRecipes }) => {
       type.forEach((t) => queryParams.append("type", t));
       if (ingredient) queryParams.append("ingredient", ingredient);
 
+      console.log("Fetching recipes with filters:", queryParams.toString());
+
       try {
         const res = await fetch(`/api/recipes?${queryParams.toString()}`);
         if (!res.ok) throw new Error("Failed to fetch recipes.");
