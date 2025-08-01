@@ -71,6 +71,7 @@ body {
   font-size: 1.1rem;
   margin-bottom: 0.2rem;
   color: black;
+  font-weight: 600;
 }
 
 .register-form input {
@@ -115,6 +116,7 @@ body {
 .register-btn {
   font-family: 'Amatica SC', cursive, sans-serif;
   font-size: 2rem;
+  font-weight: bolder;
   letter-spacing: 0.18em;
   background: var(--primary-color);
   color: #222;
