@@ -93,4 +93,68 @@
     width: 28px;
     height: 28px;
   }
-} 
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: #f8f8f8;
+  border-radius: 20px;
+  border: 1px solid #eee;
+}
+
+.username {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  min-width: 200px;
+  padding: 8px 0;
+  z-index: 1000;
+}
+
+.dropdown-username {
+  padding: 8px 16px;
+  border-bottom: 1px solid #eee;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.logout-button {
+  width: 100%;
+  padding: 8px 16px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  color: #d63031;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.logout-button:hover {
+  background-color: #fff5f5;
+}
+
+.user-icon {
+  cursor: pointer;
+}

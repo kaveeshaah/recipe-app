@@ -1,8 +1,20 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../css/Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ user, setUser }) => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    setShowDropdown(false);
+    navigate("/");
+  };
+
+  console.log("Navbar received user:", user); // Debug log
+
   return (
     <nav className="navbar">
       <div className="navbar-logo">FlavorFindr</div>
@@ -42,21 +54,54 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="navbar-user">
-        <span className="user-icon">
-          <svg
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#aaa"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="8" r="4" />
-            <path d="M21 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
-          </svg>
-        </span>
+        {user ? (
+          <div className="user-menu">
+            <div
+              className="user-icon"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#aaa"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="8" r="4" />
+                <path d="M21 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+              </svg>
+            </div>
+            {showDropdown && (
+              <div className="user-dropdown">
+                <div className="dropdown-username">
+                  <span>{user.username}</span>
+                </div>
+                <button onClick={handleLogout} className="logout-button">
+                  Logout
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <NavLink to="/login" className="user-icon">
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#aaa"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="8" r="4" />
+              <path d="M21 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
+            </svg>
+          </NavLink>
+        )}
       </div>
     </nav>
   );

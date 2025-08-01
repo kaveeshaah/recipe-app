@@ -8,7 +8,7 @@ router.post("/register", async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
-    // Check if user exists
+    // Check if user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: "Email already registered" });
 
@@ -27,22 +27,33 @@ router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Find user
-    const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: "Invalid email or password" });
+    // Find user by email or username
+    const user = await User.findOne({
+      $or: [{ email: email }, { username: email }]
+    });
 
-    // Check password
+    if (!user) return res.status(400).json({ message: "Invalid email/username or password" });
+
+    // Compare password
     const isMatch = await user.comparePassword(password);
     if (!isMatch) return res.status(400).json({ message: "Invalid email or password" });
 
-    // Create token
+    // Create JWT
     const token = jwt.sign(
       { userId: user._id, username: user.username },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
-    res.json({ token, userId: user._id, username: user.username });
+    // Send response
+    const responseData = {
+      token,
+      userId: user._id,
+      username: user.username
+    };
+
+    console.log("Login response data:", responseData);
+    res.json(responseData);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -52,9 +63,10 @@ router.post("/login", async (req, res) => {
 // Get all users (for admin/testing purposes)
 router.get("/users", async (req, res) => {
   try {
-    const users = await User.find({}, "-password"); // Exclude password field
+    const users = await User.find({}, "-password"); // Exclude password
     res.json(users);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 });
