@@ -6,8 +6,16 @@ const recipeSchema = mongoose.Schema(
     description: String,
     ingredients: [String],
     instructions: String,
-    image: String, // Store image URL or path
-    category: [String], // breakfast, dinner, culture, healthy etc.
+    image: String,
+    occasion: [String], // Christmas, Thanksgiving, New Year
+    mealTime: [String], // Breakfast, Lunch, Dinner
+    culture: [String], // Sri Lankan, Indian, European, Korean
+    type: [String], // Vegetarian, Meats
+    quickFilters: {
+      quick: { type: Boolean, default: false },
+      healthy: { type: Boolean, default: false },
+      simple: { type: Boolean, default: false }
+    },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

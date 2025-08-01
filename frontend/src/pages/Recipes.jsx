@@ -42,8 +42,6 @@ const Recipes = () => {
       <Filter setRecipes={setRecipes} />
       <Navbar />
       <div className="my-recipes-container">
-        <h2 className="my-recipes-title">My Recipes</h2>
-
         {loading && <div className="loader"></div>}
 
         {error && <p className="status-msg error">{error}</p>}

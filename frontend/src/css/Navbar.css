@@ -32,6 +32,7 @@
 .nav-link {
   font-family: 'Amatica SC', cursive, sans-serif;
   font-size: 1.35rem;
+  font-weight: 600;
   color: #222;
   text-decoration: none;
   padding: 6px 18px 6px 18px;
@@ -42,8 +43,8 @@
 
 .nav-link.active {
   background: var(--primary-color, #FCBC30);
-  color: #222;
-  font-weight: 700;
+  color: #000000;
+  font-weight: 800;
   box-shadow: 0 4px 16px rgba(252,188,48,0.08);
 }
 

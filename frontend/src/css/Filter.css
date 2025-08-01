@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Amatica+SC&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amatica+SC&family=Architects+Daughter&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
   --input-border: #ccc;
@@ -11,85 +11,258 @@
 
 .filter-container {
   width: 100%;
-  max-width: 1200px;
-  margin: 4.5rem auto 0 auto; /* less top and bottom margin */
-  padding: 0.75rem 1rem;          /* smaller padding */
-  background-color: var(--background-color);
-  border-radius: 12px;
-  box-shadow: 0 3px 8px var(--shadow-color);
-  font-family: 'Amatica SC', cursive, sans-serif;
-  color: var(--text-color);
+  margin: 64px 0 0.5rem 0;
+  padding: 20px 30px;
+  background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+              url('../images/recipesbg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
+  border-radius: 0;
+  font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
+  position: relative;
+  z-index: 1;
 }
 
-.filter-container input[type="text"] {
-  width: 90%;
-  padding: 8px 10px;             /* smaller padding */
-  margin-bottom: 0rem;        /* reduced margin */
-  border: 1.5px solid var(--input-border);
-  border-radius: 10px;
-  font-size: 0.95rem;            /* slightly smaller font */
-  font-family: 'Amatica SC', cursive, sans-serif;
-  transition: border-color 0.3s ease;
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 25px;
 }
 
-.filter-container input[type="text"]:focus {
-  border-color: var(--input-focus-border);
+.search-bar input {
+  flex: 0 1 400px;
+  padding: 15px 25px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 400;
+}
+
+.search-bar input:focus {
   outline: none;
-  box-shadow: 0 0 6px var(--primary-color);
+  border-color: #FFB938;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.search-button {
+  background: #FFB938;
+  border: none;
+  padding: 15px 35px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #000;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.search-button:hover {
+  background: #ffc561;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 185, 56, 0.3);
+}
+
+.quick-filters {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+  margin-bottom: 35px;
+}
+
+.quick-filters label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.85);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.quick-filters label:hover {
+  color: #FFB938;
+}
+
+.quick-filters input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.quick-filters input[type="checkbox"]:checked {
+  background: #FFB938;
+}
+
+.quick-filters input[type="checkbox"]:checked::before {
+  content: "✓";
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .filter-section {
-  margin-bottom: 0rem;        /* smaller bottom margin */
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem 0.75rem;           /* tighter gap */
-  align-items: center;
+  margin-top: 20px;
 }
 
-.filter-section h4 {
-  flex-basis: 100%;
-  margin-bottom: 0rem;         /* tighter spacing under header */
-  font-size: 1.2rem;             /* slightly smaller */
-  font-family: 'Amatica SC', cursive, sans-serif;
-  font-weight: 700;
-  color: var(--text-color);
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 3px;
+.filter-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 25px;
+}
+
+.filter-label {
+  min-width: 120px;
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .filter-section label {
   display: flex;
   align-items: center;
-  font-size: 0.9rem;             /* smaller font */
+  gap: 8px;
   cursor: pointer;
-  user-select: none;
-  color: var(--label-color);
+  color: rgba(255, 255, 255, 0.9);
   font-family: 'Montserrat', sans-serif;
-  margin-bottom: 0;
-  flex: 0 1 140px;               /* slightly narrower label boxes */
+  font-size: 14px;
+  font-weight: 500;
   white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.filter-section label:hover {
+  color: #FFB938;
 }
 
 .filter-section input[type="checkbox"] {
-  margin-right: 8px;             /* less space */
   width: 18px;
   height: 18px;
+  border: 2px solid #FFB938;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  background: transparent;
+  position: relative;
   cursor: pointer;
-  accent-color: var(--primary-color);
-  transition: accent-color 0.3s ease;
+  transition: all 0.3s ease;
+  margin: 0;
 }
 
-.filter-section input[type="checkbox"]:hover {
-  accent-color: var(--primary-color-dark);
+.filter-section input[type="checkbox"]:checked {
+  background: #FFB938;
+}
+
+.filter-section input[type="checkbox"]:checked::before {
+  content: "✓";
+  position: absolute;
+  color: black;
+  font-size: 12px;
+  font-weight: bold;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ingredient-select {
+  padding: 15px 25px;
+  min-width: 250px;
+  border-radius: 50px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.4);
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  padding-right: 45px;
+}
+
+.ingredient-select:focus {
+  outline: none;
+  border-color: #FFB938;
+}
+
+.ingredient-select option {
+  background-color: #333;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+}
+
+.apply-filters {
+  background: #FFB938;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #000;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.apply-filters:hover {
+  background: #ffc561;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 185, 56, 0.3);
+}
+
+.apply-filters:active {
+  transform: translateY(0);
 }
 
 @media (max-width: 480px) {
   .filter-container {
     width: 90%;
-    padding: 0.5rem 0.75rem;      /* even smaller padding on mobile */
+    padding: 0.5rem 0.75rem;
+    margin-top: 54px;
   }
   .filter-section label {
-    flex: 1 1 45%;                /* allow 2 per row on narrow screens */
+    flex: 1 1 45%;
   }
 }

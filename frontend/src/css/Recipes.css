@@ -10,16 +10,6 @@
   padding: 2rem;
 }
 
-.my-recipes-title {
-  font-size: 3rem;
-  margin-bottom: 2rem;
-  font-family: 'Amatica SC', cursive, sans-serif;
-  color: #222;
-  margin-top: 5px; 
-  font-weight: 700;
-    text-align: center;
-}
-
 .status-msg {
   text-align: center;
   color: #555;
