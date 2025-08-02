@@ -82,15 +82,12 @@ const Filter = ({ setRecipes }) => {
         if (value) queryParams.append("quickFilter", key);
       });
 
-      console.log("Fetching recipes with filters:", queryParams.toString());
-
       try {
         const res = await fetch(`/api/recipes?${queryParams.toString()}`);
         if (!res.ok) throw new Error("Failed to fetch recipes.");
         const data = await res.json();
         setRecipes(data);
       } catch (error) {
-        console.error("Error fetching filtered recipes:", error);
         setRecipes([]);
       } finally {
         setShouldFetch(false);

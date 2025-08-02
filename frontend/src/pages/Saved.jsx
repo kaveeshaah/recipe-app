@@ -23,14 +23,11 @@ const Saved = () => {
     const user = savedUser ? JSON.parse(savedUser) : null;
     const token = user?.token;
 
-    console.log("Token from localStorage:", token); // Debug log
-
     if (!token) {
       setError("Please login to view your saved recipes");
       setLoading(false);
       return;
     }
-    console.log("Making API call to /api/saved-recipes"); // Debug log
 
     fetch("/api/saved-recipes", {
       headers: {
@@ -38,22 +35,18 @@ const Saved = () => {
       },
     })
       .then((res) => {
-        console.log("Response status:", res.status); // Debug log
         if (!res.ok) {
           return res.json().then((data) => {
-            console.log("Error response:", data); // Debug log
             throw new Error(data.message || "Failed to fetch saved recipes.");
           });
         }
         return res.json();
       })
       .then((data) => {
-        console.log("Saved recipes data:", data); // Debug log
         setSavedRecipes(data);
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Fetch error:", err); // Debug log
         setError(err.message);
         setLoading(false);
       });
@@ -96,7 +89,6 @@ const Saved = () => {
         throw new Error("Failed to remove recipe");
       }
     } catch (err) {
-      console.error("Error removing recipe:", err);
       alert("Error removing recipe. Please try again.");
     }
   };

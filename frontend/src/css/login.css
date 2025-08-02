@@ -191,6 +191,20 @@
   text-align: center;
 }
 
+.success-message {
+  background: #f0fff4;
+  color: #27ae60;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid #27ae60;
+  line-height: 1.5;
+  white-space: pre-line;
+}
+
 @media (max-width: 900px) {
   .login-bg {
     flex-direction: column;

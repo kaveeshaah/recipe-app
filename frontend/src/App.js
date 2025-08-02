@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 import Home from './pages/Home';
 import About from './pages/About';  
 import Recipes from './pages/Recipes';
@@ -12,8 +14,8 @@ import Navbar from './components/Navbar';
 // Wrapper component to handle navbar visibility
 const AppContent = ({ user, setUser }) => {
   const location = useLocation();
-  const hideNavbarPaths = ['/login', '/register'];
-  const showNavbar = !hideNavbarPaths.includes(location.pathname);
+  const hideNavbarPaths = ['/login', '/register', '/forgot-password', '/reset-password'];
+  const showNavbar = !hideNavbarPaths.includes(location.pathname) && !location.pathname.startsWith('/reset-password');
 
   return (
     <>
@@ -22,6 +24,8 @@ const AppContent = ({ user, setUser }) => {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} /> 
         <Route path="/login" element={<Login setUser={setUser} />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
         <Route path="/about" element={<About />} />
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/recipes/:id" element={<ViewRecipe />} />

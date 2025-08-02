@@ -13,8 +13,6 @@ const Navbar = ({ user, setUser }) => {
     navigate("/");
   };
 
-  console.log("Navbar received user:", user); // Debug log
-
   return (
     <nav className="navbar">
       <div className="navbar-logo">FlavorFindr</div>

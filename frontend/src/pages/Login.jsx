@@ -39,14 +39,12 @@ const Login = ({ setUser }) => {
         throw new Error(data.message || "Login failed");
       }
 
-      console.log("Login response:", data);
       const userData = {
         username: data.username,
         token: data.token,
         userId: data.userId,
       };
       setUser(userData);
-      console.log("Setting user data:", userData);
       navigate("/");
     } catch (err) {
       setError(err.message);

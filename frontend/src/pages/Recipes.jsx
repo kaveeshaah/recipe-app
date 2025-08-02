@@ -105,9 +105,6 @@ const Recipes = () => {
         }
       } else {
         // Save recipe
-        console.log("Attempting to save recipe:", recipeId); // Debug log
-        console.log("Token being used:", token ? "Token exists" : "No token"); // Debug log
-
         const response = await fetch("/api/saved-recipes", {
           method: "POST",
           headers: {
@@ -116,8 +113,6 @@ const Recipes = () => {
           },
           body: JSON.stringify({ recipeId }),
         });
-
-        console.log("Save response status:", response.status); // Debug log
 
         if (response.ok) {
           setSavedRecipes((prev) => [...prev, recipeId]);
@@ -139,7 +134,6 @@ const Recipes = () => {
           window.location.href = "/login";
         } else {
           const data = await response.json();
-          console.log("Save error response:", data); // Debug log
           throw new Error(data.message || "Failed to save recipe");
         }
       }

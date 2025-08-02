@@ -96,9 +96,7 @@ exports.getAllRecipes = async (req, res) => {
       });
     }
 
-    console.log('Search Query:', query);
     const recipes = await Recipe.find(query);
-    console.log('Found Recipes:', recipes.length);
     res.json(recipes);
   } catch (error) {
     res.status(500).json({ message: error.message });

@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema({
   savedRecipes: [{ 
     type: mongoose.Schema.Types.ObjectId, 
     ref: 'Recipe' 
-  }]
+  }],
+  resetPasswordToken: { type: String },
+  resetPasswordExpires: { type: Date }
 }, { timestamps: true });
 
 // Hash password before saving
