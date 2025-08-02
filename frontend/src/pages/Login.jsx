@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import showPasswordIcon from "../icons/showpassword.png";
-import "../css/Login.css";
+import "../css/login.css";
 
 const Login = ({ setUser }) => {
   const [formData, setFormData] = useState({
