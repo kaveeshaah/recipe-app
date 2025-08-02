@@ -11,10 +11,17 @@ const Recipes = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [savedRecipes, setSavedRecipes] = useState([]); // track saved recipe IDs
+  const [savingRecipes, setSavingRecipes] = useState(new Set()); // track recipes being saved
+  const [successMessage, setSuccessMessage] = useState(""); // success notification
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("/api/recipes") // Change to "/api/recipes/mine" if user-specific route
+    fetchRecipes();
+    fetchSavedRecipes();
+  }, []);
+
+  const fetchRecipes = () => {
+    fetch("/api/recipes")
       .then((res) => {
         if (!res.ok) {
           throw new Error("Failed to fetch recipes.");
@@ -29,16 +36,136 @@ const Recipes = () => {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
-
-  const toggleSave = (id) => {
-    setSavedRecipes((prev) =>
-      prev.includes(id) ? prev.filter((rid) => rid !== id) : [...prev, id]
-    );
   };
 
+  const fetchSavedRecipes = () => {
+    // Get token from user object in localStorage
+    const savedUser = localStorage.getItem("user");
+    const user = savedUser ? JSON.parse(savedUser) : null;
+    const token = user?.token;
+
+    if (!token) return; // User not logged in
+
+    fetch("/api/saved-recipes", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return []; // If error, return empty array
+      })
+      .then((data) => {
+        const savedIds = data.map((recipe) => recipe._id);
+        setSavedRecipes(savedIds);
+      })
+      .catch((err) => {
+        console.error("Error fetching saved recipes:", err);
+      });
+  };
+
+  const toggleSave = async (recipeId) => {
+    // Get token from user object in localStorage
+    const savedUser = localStorage.getItem("user");
+    const user = savedUser ? JSON.parse(savedUser) : null;
+    const token = user?.token;
+
+    if (!token) {
+      alert("Please login to save recipes");
+      return;
+    }
+
+    // Prevent multiple saves
+    if (savingRecipes.has(recipeId)) return;
+
+    setSavingRecipes((prev) => new Set(prev).add(recipeId));
+
+    try {
+      const isSaved = savedRecipes.includes(recipeId);
+
+      if (isSaved) {
+        // Remove from saved
+        const response = await fetch(`/api/saved-recipes/${recipeId}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          setSavedRecipes((prev) => prev.filter((id) => id !== recipeId));
+        } else if (response.status === 401) {
+          alert("Your session has expired. Please login again.");
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        } else {
+          throw new Error("Failed to remove recipe");
+        }
+      } else {
+        // Save recipe
+        console.log("Attempting to save recipe:", recipeId); // Debug log
+        console.log("Token being used:", token ? "Token exists" : "No token"); // Debug log
+
+        const response = await fetch("/api/saved-recipes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ recipeId }),
+        });
+
+        console.log("Save response status:", response.status); // Debug log
+
+        if (response.ok) {
+          setSavedRecipes((prev) => [...prev, recipeId]);
+
+          // Find the recipe name for the success message
+          const savedRecipe = recipes.find((recipe) => recipe._id === recipeId);
+          const recipeName = savedRecipe ? savedRecipe.title : "Recipe";
+
+          // Show success message
+          setSuccessMessage(`✅ "${recipeName}" saved successfully!`);
+
+          // Hide message after 3 seconds
+          setTimeout(() => {
+            setSuccessMessage("");
+          }, 3000);
+        } else if (response.status === 401) {
+          alert("Your session has expired. Please login again.");
+          localStorage.removeItem("token");
+          window.location.href = "/login";
+        } else {
+          const data = await response.json();
+          console.log("Save error response:", data); // Debug log
+          throw new Error(data.message || "Failed to save recipe");
+        }
+      }
+    } catch (error) {
+      console.error("Error toggling save:", error);
+
+      if (error.message === "Invalid token") {
+        alert("Your session has expired. Please login again.");
+        localStorage.removeItem("token");
+        window.location.href = "/login";
+      } else {
+        alert("Error saving recipe. Please try again.");
+      }
+    } finally {
+      setSavingRecipes((prev) => {
+        const newSet = new Set(prev);
+        newSet.delete(recipeId);
+        return newSet;
+      });
+    }
+  };
   return (
     <div className="my-recipes-page">
+      {/* Success Notification */}
+      {successMessage && <div className="success-toast">{successMessage}</div>}
+
       <Filter setRecipes={setRecipes} />
       <Navbar />
       <div className="my-recipes-container">
@@ -67,8 +194,11 @@ const Recipes = () => {
                       onClick={() => toggleSave(recipe._id)}
                       aria-label={isSaved ? "Unsave recipe" : "Save recipe"}
                       type="button"
+                      disabled={savingRecipes.has(recipe._id)}
                     >
-                      {isSaved ? (
+                      {savingRecipes.has(recipe._id) ? (
+                        <div className="saving-spinner">⏳</div>
+                      ) : isSaved ? (
                         <FaBookmark className="bookmark-icon saved" />
                       ) : (
                         <FaRegBookmark className="bookmark-icon" />

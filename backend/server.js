@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const recipeRoutes = require("./routes/recipeRoutes");
 const authRoutes = require("./routes/auth");      // Add auth routes here
+const savedRecipesRoutes = require("./routes/savedRecipes"); // Add saved recipes routes
 const authMiddleware = require("./middleware/authMiddleware");  // Auth middleware
 
 dotenv.config();
@@ -17,6 +18,9 @@ app.use(cors());
 // Public routes
 app.use("/api/auth", authRoutes);        // Register & login routes
 app.use("/api/recipes", recipeRoutes);   // Your existing recipe routes
+
+// Protected routes
+app.use("/api/saved-recipes", savedRecipesRoutes); // Saved recipes routes
 
 // Example protected route
 app.get("/api/protected", authMiddleware, (req, res) => {

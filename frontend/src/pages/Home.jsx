@@ -8,8 +8,23 @@ import Footer from "../components/Footer";
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showWelcome, setShowWelcome] = useState(false);
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
   const recipesPerPage = 4;
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user?.username) {
+      setUsername(user.username);
+      setShowWelcome(true);
+      // Hide welcome message after 3.5 seconds (matching CSS animation)
+      const timer = setTimeout(() => {
+        setShowWelcome(false);
+      }, 3500);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   const handleScroll = (e) => {
     const container = e.target;
@@ -28,6 +43,11 @@ const Home = () => {
 
   return (
     <div className="home-page">
+      {showWelcome && (
+        <div className="welcome-toast">
+          Welcome back, <span>{username}</span>!
+        </div>
+      )}
       <Navbar />
       {/* Banner Section */}
       <div className="home-banner">

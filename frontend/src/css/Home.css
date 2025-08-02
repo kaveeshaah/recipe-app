@@ -18,6 +18,46 @@
   text-shadow: 1px 1px 2px rgba(0,0,0,0.12);
 }
 
+.welcome-toast {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  font-family: 'Montserrat', sans-serif;
+  border: 2px solid var(--primary-color);
+  animation: slideDown 0.5s ease-out forwards, fadeOut 0.5s ease-in forwards 3s;
+}
+
+.welcome-toast span {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+@keyframes slideDown {
+  from {
+    top: -100px;
+    opacity: 0;
+  }
+  to {
+    top: 80px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .home-banner {
   width: 100vw;
   max-width: 100%;
@@ -219,7 +259,7 @@
 .recipe-title {
   font-family: 'Amatica SC', cursive, sans-serif;
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight:bolder;
   margin: 0 0 10px 0;
   color: #000;
   text-align: left;
@@ -272,7 +312,7 @@
   min-width: 85px;
 }
 
-.recipe-btn {
+.home-page .recipe-btn {
   width: 60%;
   margin: 0 0 0 0;
   background: var(--primary-color, #FCBC30);
@@ -290,7 +330,7 @@
   margin-bottom: 10px;
 }
 
-.recipe-btn:hover {
+.home-page .recipe-btn:hover {
   background: #e0a800;
 }
 
