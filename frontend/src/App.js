@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import About from './pages/About';  
 import Recipes from './pages/Recipes';
 import Saved from './pages/Saved';
+import ViewRecipe from './pages/ViewRecipe';
 import Navbar from './components/Navbar';
 
 // Wrapper component to handle navbar visibility
@@ -23,6 +24,7 @@ const AppContent = ({ user, setUser }) => {
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/about" element={<About />} />
         <Route path="/recipes" element={<Recipes />} />
+        <Route path="/recipes/:id" element={<ViewRecipe />} />
         <Route path="/saved" element={<Saved />} />
       </Routes>
     </>
