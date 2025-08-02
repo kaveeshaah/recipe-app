@@ -44,7 +44,7 @@ const Login = ({ setUser }) => {
         token: data.token,
         userId: data.userId,
       };
-      setUser(userData);
+      setUser(userData, true); // Pass true to indicate this is a login
       navigate("/");
     } catch (err) {
       setError(err.message);

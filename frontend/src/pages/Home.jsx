@@ -5,7 +5,7 @@ import "../css/Home.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const Home = () => {
+const Home = ({ justLoggedIn, setJustLoggedIn }) => {
   const [recipes, setRecipes] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [showWelcome, setShowWelcome] = useState(false);
@@ -14,17 +14,21 @@ const Home = () => {
   const recipesPerPage = 4;
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user?.username) {
-      setUsername(user.username);
-      setShowWelcome(true);
-      // Hide welcome message after 3.5 seconds (matching CSS animation)
-      const timer = setTimeout(() => {
-        setShowWelcome(false);
-      }, 3500);
-      return () => clearTimeout(timer);
+    // Only show welcome message if user just logged in
+    if (justLoggedIn) {
+      const user = JSON.parse(localStorage.getItem("user"));
+      if (user?.username) {
+        setUsername(user.username);
+        setShowWelcome(true);
+        // Hide welcome message after 3.5 seconds (matching CSS animation)
+        const timer = setTimeout(() => {
+          setShowWelcome(false);
+          setJustLoggedIn(false); // Reset the login state
+        }, 3500);
+        return () => clearTimeout(timer);
+      }
     }
-  }, []);
+  }, [justLoggedIn, setJustLoggedIn]);
 
   const handleScroll = (e) => {
     const container = e.target;

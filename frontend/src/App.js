@@ -12,7 +12,7 @@ import ViewRecipe from './pages/ViewRecipe';
 import Navbar from './components/Navbar';
 
 // Wrapper component to handle navbar visibility
-const AppContent = ({ user, setUser }) => {
+const AppContent = ({ user, setUser, justLoggedIn, setJustLoggedIn }) => {
   const location = useLocation();
   const hideNavbarPaths = ['/login', '/register', '/forgot-password', '/reset-password'];
   const showNavbar = !hideNavbarPaths.includes(location.pathname) && !location.pathname.startsWith('/reset-password');
@@ -21,7 +21,7 @@ const AppContent = ({ user, setUser }) => {
     <>
       {showNavbar && <Navbar user={user} setUser={setUser} />}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home justLoggedIn={justLoggedIn} setJustLoggedIn={setJustLoggedIn} />} />
         <Route path="/register" element={<Register />} /> 
         <Route path="/login" element={<Login setUser={setUser} />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -42,19 +42,30 @@ const App = () => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
   
+  // Track if user just logged in (for welcome message)
+  const [justLoggedIn, setJustLoggedIn] = useState(false);
+  
   // Update localStorage when user state changes
-  const handleSetUser = (userData) => {
+  const handleSetUser = (userData, isLogin = false) => {
     setUser(userData);
+    setJustLoggedIn(isLogin); // Set to true only when logging in
+    
     if (userData) {
       localStorage.setItem('user', JSON.stringify(userData));
     } else {
       localStorage.removeItem('user');
+      setJustLoggedIn(false);
     }
   };
   
   return (
     <Router>
-      <AppContent user={user} setUser={handleSetUser} />
+      <AppContent 
+        user={user} 
+        setUser={handleSetUser} 
+        justLoggedIn={justLoggedIn}
+        setJustLoggedIn={setJustLoggedIn}
+      />
     </Router>
   );
 };
